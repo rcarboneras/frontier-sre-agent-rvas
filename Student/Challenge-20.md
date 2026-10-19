@@ -21,11 +21,37 @@ This extends the proactive pattern from Challenges 16–18 from Azure resources 
 ### Before you start
 
 - The agent's managed identity needs the Microsoft Graph **application** permission `Application.Read.All` with tenant-wide admin consent. This is a Graph app-role assignment, not an Azure RBAC role. Agree with the tenant admin who grants it.
-- Review the task definition in `Resources/azure-sre-agent-config/automations/scheduled-tasks/monthly-entra-credential-expiration-audit.yaml`.
+- Review the task definition in [`Resources/azure-sre-agent-config/automations/scheduled-tasks/monthly-entra-credential-expiration-audit.yaml`](./Resources/azure-sre-agent-config/automations/scheduled-tasks/monthly-entra-credential-expiration-audit.yaml).
 
 ### What to do
 
-- Run the audit on demand by giving the agent the prompt from the task definition, and review both artifacts.
+<details>
+<summary>Prompt to use (same as the task definition)</summary>
+
+```text
+Perform the monthly, read-only Microsoft Entra credential-expiration audit and publish BOTH a PDF
+and a self-contained actionable HTML report. Scope: Microsoft Graph v1.0 applications and
+servicePrincipals; include passwordCredentials and keyCredentials only when endDateTime is present;
+exclude service principals whose servicePrincipalType is ManagedIdentity; use managed identity
+authentication only; follow every @odata.nextLink until the inventory is complete. Classify each
+credential: EXPIRED (endDateTime before now), CRITICAL (0-7 days), EXPIRING SOON (more than 7 and up
+to 30 days), EXPIRING (more than 30 and up to 90 days), Valid (more than 90 days). Artifacts:
+azure-ad-credential-expiration-audit-YYYY-MM-DD.pdf and
+azure-ad-credential-expiration-audit-YYYY-MM-DD.html. The HTML embeds the inventory JSON (no live
+Graph calls on open), renders an accessible table where every column is sortable in both directions
+(dates and days-remaining sorted numerically, active sort shown, filters preserved), and offers
+credential-name search, minimum/maximum days-remaining filters, status and object-type filters,
+clear filters, filtered CSV export, and direct Entra action links. Validation: require a successful,
+non-zero Graph retrieval; reconcile report counts to the embedded rows; test name filtering, the
+maximum-30-day filter, action links, CSV download and sorting on every column; check the PDF title
+and findings text; publish both artifacts and return links. Safety: READ-ONLY. Do not change any
+credential, application, service principal, permission, role or Azure resource. Do not send email,
+notifications or tickets. If Graph retrieval fails, do not publish a success-shaped report.
+```
+
+</details>
+
+- Run the audit on demand by giving the agent the prompt above, and review both artifacts.
 - Check that managed identities are excluded and that every page of results was retrieved, not just the first.
 - In the HTML report, filter to credentials expiring within 30 days, sort by days remaining, and export the filtered list as CSV.
 - Create the scheduled task in your agent (portal or data-plane API) so it runs monthly, then trigger it once manually.
