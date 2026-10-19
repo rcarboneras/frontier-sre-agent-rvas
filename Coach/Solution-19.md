@@ -1,4 +1,4 @@
-[< Previous Solution](./Solution-18.md) | **[Home](./README.md)**
+[< Previous Solution](./Solution-18.md) | **[Home](./README.md)** | [Next Solution >](./Solution-20.md)
 
 # Coach Guide — Challenge 19: Build Your Own Production-Ready SRE Agent
 

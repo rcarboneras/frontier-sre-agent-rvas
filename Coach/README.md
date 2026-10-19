@@ -4,7 +4,7 @@
 
 # Coach Index — Azure SRE Agent Workshop
 
-Coach and facilitator guides for all 20 workshop challenges.
+Coach and facilitator guides for all 20 workshop challenges, plus 3 optional identity and governance challenges (20–22).
 
 ## Solution Index
 
@@ -30,11 +30,14 @@ Coach and facilitator guides for all 20 workshop challenges.
 | 17 | Observability Freshness Verification | [Solution-17.md](./Solution-17.md) |
 | 18 | Subscription Cost Optimization Review | [Solution-18.md](./Solution-18.md) |
 | 19 | Build Your Own Production-Ready SRE Agent | [Solution-19.md](./Solution-19.md) |
+| 20 | Entra Credential Expiration Audit *(optional)* | [Solution-20.md](./Solution-20.md) |
+| 21 | Orphaned RBAC Principal Audit *(optional)* | [Solution-21.md](./Solution-21.md) |
+| 22 | Tenant License Optimization *(optional)* | [Solution-22.md](./Solution-22.md) |
 
 ## Deployment Notes
 
 - Student challenge files live in `../Student/Challenge-XX.md`.
-- Coach guides live beside this index in `Solution-00.md` through `Solution-19.md`.
+- Coach guides live beside this index in `Solution-00.md` through `Solution-22.md` (20–22 are the optional identity and governance challenges).
 - Core config bundle is under `../Student/Resources/azure-sre-agent-config/`.
 - The Berlin MCP connector used in Challenges 07 and 08 is deployed via Terraform and ships in the default config bundle.
 - Challenge 10 uses `make trigger-parking-report` / `make restore-parking-report` to emit and clear synthetic `VMHealthStatus_CL` evidence. Challenge 15 uses `make trigger-parking-service-down` / `make restore-parking-service` for a real Paris API service outage.
@@ -149,3 +152,6 @@ It uses fake Azure/Terraform responses; it does not deploy the lab.
 | 17 | Observability Freshness Verification | Telemetry pipeline health, ingestion lag, coverage gaps | DCR not collecting all facilities; teams mistake stale data for healthy data | **20 min** | If freshness check returns all green with no analysis |
 | 18 | Subscription Cost Optimization Review | FinOps, Azure Advisor, Resource Graph, workload cost profiles | Cost Management access missing; teams skip knowledge-base grounding step | **25–30 min** | If recommendations ignore workload criticality |
 | 19 | Build Your Own | Custom subagent, skill authoring, end-to-end test, presentation | Scope too broad; YAML syntax errors; missing knowledge doc | **45–60 min** | If team has no working demo after 40 min |
+| 20 | Entra Credential Expiration Audit *(optional)* | Graph app permissions, credential inventory, paging, fail-closed reporting | Application.Read.All not consented; first page only; managed identities not excluded | **25–30 min** | If the report shows zero credentials without stating how many objects were read |
+| 21 | Orphaned RBAC Principal Audit *(optional)* | RBAC scopes, Identity not found, Graph getByIds, coverage warnings | Directory.Read.All missing; no Reader at management-group scope; inherited duplicates | **25–35 min** | If unverifiable principals are reported as orphans |
+| 22 | Tenant License Optimization *(optional)* | Custom MCP bridge, managed identity auth, license FinOps, scheduled report | Audience/scope mismatch (401); Graph consent missing; no Entra ID P1/P2 for sign-in data | **45–60 min** | If the connector is not connected after 15 min |
