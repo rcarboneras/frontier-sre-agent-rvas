@@ -29,14 +29,27 @@ In this challenge you connect the bridge as `license-optimization-mcp`, investig
 <summary>Scheduled task prompt (same as the task definition)</summary>
 
 ```text
-Use the license-optimization-mcp connector to generate the weekly license optimization report.
-Include: current license consumption by SKU (purchased/enabled, consumed, unassigned and utilization
-percentage); unassigned licenses by SKU; SKUs under 70 percent utilization; licensed users with no
-sign-in for more than 90 days, grouped by accountEnabled; and the top 5 recommended cleanup actions
-with the validation steps required before reclaiming any license. Format the output as an executive
-summary followed by a detailed table. Read-only: do not assign, remove or modify licenses, users or
-groups, and do not send email or Teams messages. If the connector or Microsoft Graph returns an
-error, say which data is missing instead of producing a partial report that looks complete.
+Autonomous Scheduled Run — Weekly tenant license optimization report
+
+Goal: Use the license-optimization-mcp connector to produce the weekly, read-only Microsoft 365 / Entra license optimization report.
+
+Prerequisite — connector:
+- The license-optimization-mcp connector (SRE Agent MCP Enterprise Bridge) must be connected with managed identity authentication and its tools selected.
+- If the connector or Microsoft Graph returns an error, say which data is missing instead of producing a partial report that looks complete.
+
+Report contents:
+- Current license consumption by SKU: purchased/enabled, consumed, unassigned, and utilization percentage.
+- Unassigned licenses by SKU.
+- SKUs under 70 percent utilization.
+- Licensed users with no sign-in for more than 90 days, grouped by accountEnabled.
+- Top 5 recommended cleanup actions, each with the validation steps required before reclaiming any license.
+
+Output:
+- An executive summary followed by a detailed table.
+
+Safety:
+- READ-ONLY; do not assign, remove, or modify licenses, users, or groups.
+- No email or Teams messages.
 ```
 
 </details>
