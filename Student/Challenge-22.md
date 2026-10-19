@@ -21,15 +21,31 @@ In this challenge you connect the bridge as `license-optimization-mcp`, investig
 ### Before you start
 
 - Deploy the bridge by following the [SRE Agent MCP Enterprise Bridge](https://github.com/rcarboneras/SRE-Agent/tree/main/SRE-MCPEnterprise-bridge) README. You need permission to create an app registration, grant Graph application permissions with admin consent, and deploy Azure Container Apps and Azure Container Registry.
-- Review the task definition in `Resources/azure-sre-agent-config/automations/scheduled-tasks/weekly-tenant-license-optimization.yaml`.
+- Review the task definition in [`Resources/azure-sre-agent-config/automations/scheduled-tasks/weekly-tenant-license-optimization.yaml`](./Resources/azure-sre-agent-config/automations/scheduled-tasks/weekly-tenant-license-optimization.yaml).
 
 ### What to do
+
+<details>
+<summary>Scheduled task prompt (same as the task definition)</summary>
+
+```text
+Use the license-optimization-mcp connector to generate the weekly license optimization report.
+Include: current license consumption by SKU (purchased/enabled, consumed, unassigned and utilization
+percentage); unassigned licenses by SKU; SKUs under 70 percent utilization; licensed users with no
+sign-in for more than 90 days, grouped by accountEnabled; and the top 5 recommended cleanup actions
+with the validation steps required before reclaiming any license. Format the output as an executive
+summary followed by a detailed table. Read-only: do not assign, remove or modify licenses, users or
+groups, and do not send email or Teams messages. If the connector or Microsoft Graph returns an
+error, say which data is missing instead of producing a partial report that looks complete.
+```
+
+</details>
 
 - Add the bridge to your agent as a **Streamable-HTTP** MCP connector named `license-optimization-mcp`, authenticated with the agent's managed identity and the bridge API scope. Select its tools.
 - Ask the agent for current license consumption by SKU and highlight SKUs below 70 % utilization.
 - Ask it to find licensed users with no sign-in in the last 90 days, grouped by whether the account is enabled, and to recommend which to review first.
 - Ask it for a short list of license optimization recommendations, including the checks needed before reclaiming any license.
-- Create the weekly scheduled task and trigger it once manually.
+- Create the weekly scheduled task with the prompt above and trigger it once manually.
 
 ## Success Criteria
 
