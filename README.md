@@ -48,6 +48,11 @@ fundamentals through advanced autonomous operations and FinOps.
 | [17](Student/Challenge-17.md) | Observability Freshness Verification | Monitoring the Monitoring · Coverage Analysis |
 | [18](Student/Challenge-18.md) | Subscription Cost Optimization Review | FinOps · Azure Advisor · Cost Governance |
 | [19](Student/Challenge-19.md) | Build Your Own Production-Ready SRE Agent | Capstone: design, implement & demo |
+| [20](Student/Challenge-20.md) | Entra Credential Expiration Audit *(optional)* | Scheduled Tasks · Microsoft Graph · Identity Hygiene |
+| [21](Student/Challenge-21.md) | Orphaned RBAC Principal Audit *(optional)* | Scheduled Tasks · Azure RBAC · Coverage-aware Reporting |
+| [22](Student/Challenge-22.md) | Tenant License Optimization *(optional)* | Custom MCP Connector · Managed Identity · FinOps for Licensing |
+
+Challenges 20–22 are an optional **Identity & Governance** extension: read-only scheduled audits of Entra credentials, orphaned RBAC assignments and tenant license usage.
 
 ### SQL Server DBA track
 
