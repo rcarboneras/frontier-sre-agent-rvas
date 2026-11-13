@@ -1,0 +1,27 @@
+id: 0079-azure-custom-role-designer
+status: built
+title: "Azure RBAC and Entra custom role designer"
+summary: "Design, review, right-size and audit Azure RBAC and Microsoft Entra ID custom roles with evidence for each permission, explicit risk review and approval-gated Azure role changes."
+domain: identity-access
+trigger: [chat]
+frequency: "On demand"
+timeSaved: Medium
+topPick: false
+products: [azure-rbac, entra-id, azure-sre-agent]
+autonomy: approval
+samplePrompt: "Right-size the permissions of <IDENTITY_OBJECT_ID> on <RESOURCE_GROUP_SCOPE>. Compare built-in roles first, justify each action with evidence, and deliver the role JSON and deployment commands without changing anything."
+source: { type: community, url: "https://github.com/rcarboneras/SRE-Agent/tree/main/Agents" }
+package:
+  version: 0.1.0
+  apiVersion: azuresre.ai/v1
+  requires:
+    connectors: []
+    roles:
+      - "SRE Agent Administrator for installation and action approval"
+      - "Reader for the agent identity on the Azure scopes being analyzed"
+      - "Directory.Read.All application permission only when needed for directory lookups"
+      - "Optional roleDefinitions/read and roleDefinitions/write for approval-gated Azure role creation and updates"
+  parameters: {}
+  contents:
+    skills: [manifests/skills/azure-custom-role-designer/SKILL.md]
+    subagents: [manifests/subagents/role-designer.yaml]

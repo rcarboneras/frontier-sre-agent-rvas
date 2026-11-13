@@ -175,4 +175,5 @@ Run the framework tests with `usecases/_framework/tests/run.sh`.
 | [0076-vm-performance-anomaly-detection](0076-vm-performance-anomaly-detection/) | VM performance anomaly detection | management | idea |
 | [0077-vnet-peering-health-check](0077-vnet-peering-health-check/) | VNet peering health check | network-topology | idea |
 | [0078-workbook-auto-generation](0078-workbook-auto-generation/) | Workbook auto-generation | management | idea |
+| [0079-azure-custom-role-designer](0079-azure-custom-role-designer/) | Azure RBAC and Entra custom role designer | identity-access | built |
 <!-- usecases:index:end -->
